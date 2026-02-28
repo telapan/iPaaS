@@ -6,7 +6,8 @@ import { Database, FolderKanban, ArrowLeftRight, Download } from "lucide-react";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
-  const userId = session!.user.id;
+  if (!session) return null;
+  const userId = session.user.id;
 
   const [connectionCount, projectCount, crosswalkCount, exportCount] =
     await Promise.all([
